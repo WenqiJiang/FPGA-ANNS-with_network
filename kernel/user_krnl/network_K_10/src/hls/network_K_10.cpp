@@ -432,7 +432,7 @@ void consume_query_vector_and_generate_output_K_100(
 
 extern "C" {
 
-    void general_11_K_10(
+    void network_K_10(
 
         // Internal Stream, arg 0~3
         hls::stream<pkt512>& s_axis_udp_rx, 
