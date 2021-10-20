@@ -457,8 +457,7 @@ extern "C" {
         // 16~18
         int useConn, 
         int listenPort, 
-        int expectedRxByteCnt,
-            ) {
+        int expectedRxByteCnt) {
 
 #pragma HLS INTERFACE axis port = s_axis_udp_rx
 #pragma HLS INTERFACE axis port = m_axis_udp_tx
