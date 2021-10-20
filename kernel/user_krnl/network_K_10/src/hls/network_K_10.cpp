@@ -35,34 +35,7 @@
 #include <hls_stream.h>
 
 #include "constants.hpp"
-#include "debugger.hpp"
-#include "helpers.hpp"
 #include "types.hpp"
-
-// stage 1
-#if OPQ_ENABLE
-#include "OPQ_preprocessing.hpp"
-#endif 
-
-// stage 2
-#include "cluster_distance_computation.hpp"
-
-// stage 3
-#include "priority_queue_vector_quantizer.hpp"
-#include "select_Voronoi_cell.hpp"
-
-// stage 4
-#include "LUT_construction.hpp"
-
-// stage 5
-#include "distance_estimation_by_LUT.hpp"
-#include "HBM_interconnections.hpp"
-
-// stage 6
-#include "priority_queue_distance_results_wrapper.hpp"
-#if SORT_GROUP_NUM
-#include "sort_reduction_with_vecID.hpp"
-#endif
 
 #define SESSION_NUM 16
 
