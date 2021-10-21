@@ -16,7 +16,7 @@ void PQ_lookup_computation_wrapper(
     hls::stream<distance_LUT_PQ16_t>& s_distance_LUT,
     hls::stream<int>& s_scanned_entries_every_cell_PQ_lookup_computation, 
     hls::stream<int>& s_last_valid_channel, 
-    hls::stream<single_PQ_result> (&s_single_PQ_result)[SORT_GROUP_NUM][16]);
+    hls::stream<single_PQ_result> (&s_single_PQ_result)[stream_num]);
 
 
 template<const int query_num>
@@ -288,7 +288,7 @@ void PQ_lookup_computation_wrapper(
     hls::stream<distance_LUT_PQ16_t>& s_distance_LUT,
     hls::stream<int>& s_scanned_entries_every_cell_PQ_lookup_computation, 
     hls::stream<int>& s_last_valid_channel, 
-    hls::stream<single_PQ_result> (&s_single_PQ_result)[SORT_GROUP_NUM][16]) {
+    hls::stream<single_PQ_result> (&s_single_PQ_result)[stream_num]) {
 #pragma HLS inline
 
     hls::stream<distance_LUT_PQ16_t> s_distance_LUT_systolic[stream_num];

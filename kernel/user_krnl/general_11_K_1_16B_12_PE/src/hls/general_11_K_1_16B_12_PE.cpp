@@ -399,7 +399,7 @@ void network_query_controller_pull(
 
 extern "C" {
 
-    void general_11_K_1(
+    void general_11_K_1_16B_12_PE(
 
         // Internal Stream, arg 0~3
         hls::stream<pkt512>& s_axis_udp_rx, 
@@ -411,7 +411,7 @@ extern "C" {
         hls::stream<pkt16>& m_axis_tcp_listen_port, 
         hls::stream<pkt8>& s_axis_tcp_port_status, 
         hls::stream<pkt64>& m_axis_tcp_open_connection, 
-        hls::stream<pkt128>& s_axis_tcp_open_status, 
+        hls::stream<pkt32>& s_axis_tcp_open_status, 
         hls::stream<pkt16>& m_axis_tcp_close_connection, 
         hls::stream<pkt128>& s_axis_tcp_notification, 
         hls::stream<pkt32>& m_axis_tcp_read_pkg, 

@@ -21,8 +21,6 @@ void compute_cell_distance_wrapper(
     const ap_uint512_t* HBM_centroid_vectors_stage2_0,
     const ap_uint512_t* HBM_centroid_vectors_stage2_1,
     const ap_uint512_t* HBM_centroid_vectors_stage2_2,
-    const ap_uint512_t* HBM_centroid_vectors_stage2_3,
-    const ap_uint512_t* HBM_centroid_vectors_stage2_4,
 
     hls::stream<float> &s_query_vectors,
     hls::stream<dist_cell_ID_t> &s_cell_distance);
@@ -912,8 +910,6 @@ void compute_cell_distance_wrapper(
     const ap_uint512_t* HBM_centroid_vectors_stage2_0,
     const ap_uint512_t* HBM_centroid_vectors_stage2_1,
     const ap_uint512_t* HBM_centroid_vectors_stage2_2,
-    const ap_uint512_t* HBM_centroid_vectors_stage2_3,
-    const ap_uint512_t* HBM_centroid_vectors_stage2_4,
 
     hls::stream<float> &s_query_vectors,
     hls::stream<dist_cell_ID_t> &s_cell_distance) {
@@ -960,31 +956,12 @@ void compute_cell_distance_wrapper(
     load_vector_quantizer_from_HBM<query_num>(
         start_cell_ID_load_2,
         centroids_per_partition_even,
-        centroids_per_partition_even,
+        centroids_per_partition_last_PE,
         HBM_centroid_vectors_stage2_2,
         s_HBM_centroid_vectors[2 * 2],
         s_HBM_centroid_vectors[2 * 2 + 1],
         s_cell_ID[2 * 2],
         s_cell_ID[2 * 2 + 1]);
-
-    int start_cell_ID_load_3 = 3 * 2 * centroids_per_partition_even;
-    load_vector_quantizer_from_HBM<query_num>(
-        start_cell_ID_load_3,
-        centroids_per_partition_even,
-        centroids_per_partition_even,
-        HBM_centroid_vectors_stage2_3,
-        s_HBM_centroid_vectors[3 * 2],
-        s_HBM_centroid_vectors[3 * 2 + 1],
-        s_cell_ID[3 * 2],
-        s_cell_ID[3 * 2 + 1]);
-
-    int start_cell_ID_load_4 = 4 * 2 * centroids_per_partition_even;
-    load_vector_quantizer_from_HBM<query_num>(
-        start_cell_ID_load_4,
-        centroids_per_partition_last_PE,
-        HBM_centroid_vectors_stage2_4,
-        s_HBM_centroid_vectors[4 * 2],
-        s_cell_ID[4 * 2]);
 
 
     // head
@@ -1042,39 +1019,6 @@ void compute_cell_distance_wrapper(
             s_query_vectors_forward[4],
             s_partial_cell_distance_forward[4 - 1],
             s_partial_cell_distance_forward[4]);
-
-        compute_cell_distance_middle_PE<QUERY_NUM>(
-            5,
-            centroids_per_partition, 
-            total_centriods,
-            s_HBM_centroid_vectors[5],
-            s_cell_ID[5],
-            s_query_vectors_forward[5 - 1],
-            s_query_vectors_forward[5],
-            s_partial_cell_distance_forward[5 - 1],
-            s_partial_cell_distance_forward[5]);
-
-        compute_cell_distance_middle_PE<QUERY_NUM>(
-            6,
-            centroids_per_partition, 
-            total_centriods,
-            s_HBM_centroid_vectors[6],
-            s_cell_ID[6],
-            s_query_vectors_forward[6 - 1],
-            s_query_vectors_forward[6],
-            s_partial_cell_distance_forward[6 - 1],
-            s_partial_cell_distance_forward[6]);
-
-        compute_cell_distance_middle_PE<QUERY_NUM>(
-            7,
-            centroids_per_partition, 
-            total_centriods,
-            s_HBM_centroid_vectors[7],
-            s_cell_ID[7],
-            s_query_vectors_forward[7 - 1],
-            s_query_vectors_forward[7],
-            s_partial_cell_distance_forward[7 - 1],
-            s_partial_cell_distance_forward[7]);
     
         // tail
         compute_cell_distance_tail_PE<QUERY_NUM>(
@@ -1082,8 +1026,8 @@ void compute_cell_distance_wrapper(
             centroids_per_partition, 
             centroids_per_partition_last_PE, 
             total_centriods,
-            s_HBM_centroid_vectors[8],
-            s_cell_ID[8],
+            s_HBM_centroid_vectors[5],
+            s_cell_ID[5],
             s_query_vectors_forward[PE_NUM_CENTER_DIST_COMP_EVEN - 1],
             s_partial_cell_distance_forward[PE_NUM_CENTER_DIST_COMP_EVEN - 1],
             s_cell_distance);

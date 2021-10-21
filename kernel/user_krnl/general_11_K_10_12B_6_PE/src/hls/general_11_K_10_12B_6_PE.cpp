@@ -399,7 +399,7 @@ void network_query_controller_pull(
 
 extern "C" {
 
-    void general_11_K_1_13B_6_PE(
+    void general_11_K_10_12B_6_PE(
 
         // Internal Stream, arg 0~3
         hls::stream<pkt512>& s_axis_udp_rx, 
@@ -440,7 +440,6 @@ extern "C" {
         const ap_uint512_t* HBM_in9, 
         const ap_uint512_t* HBM_in10,
         const ap_uint512_t* HBM_in11,
-        const ap_uint512_t* HBM_in12,
 
         const ap_uint512_t* HBM_centroid_vectors_stage2_0,
         const ap_uint512_t* HBM_centroid_vectors_stage2_1,
@@ -479,7 +478,6 @@ extern "C" {
 #pragma HLS INTERFACE m_axi port=HBM_in9  offset=slave bundle=gmem9
 #pragma HLS INTERFACE m_axi port=HBM_in10  offset=slave bundle=gmem10
 #pragma HLS INTERFACE m_axi port=HBM_in11  offset=slave bundle=gmem11
-#pragma HLS INTERFACE m_axi port=HBM_in12  offset=slave bundle=gmem12
 
 #pragma HLS INTERFACE m_axi port=HBM_centroid_vectors_stage2_0  offset=slave bundle=gmemC0
 #pragma HLS INTERFACE m_axi port=HBM_centroid_vectors_stage2_1  offset=slave bundle=gmemC1
@@ -500,7 +498,6 @@ extern "C" {
 #pragma HLS INTERFACE s_axilite port=HBM_in9  
 #pragma HLS INTERFACE s_axilite port=HBM_in10  
 #pragma HLS INTERFACE s_axilite port=HBM_in11  
-#pragma HLS INTERFACE s_axilite port=HBM_in12  
 
 #pragma HLS INTERFACE s_axilite port=HBM_centroid_vectors_stage2_0
 #pragma HLS INTERFACE s_axilite port=HBM_centroid_vectors_stage2_1
@@ -823,7 +820,6 @@ extern "C" {
         HBM_in9,
         HBM_in10,
         HBM_in11,
-        HBM_in12,
 
         s_start_addr_every_cell,
         s_scanned_entries_every_cell_Load_unit,
@@ -861,13 +857,14 @@ extern "C" {
         s_scanned_entries_per_query_Priority_queue, 
         s_single_PQ_result,
         s_output);
+
         ///////// Network Send Starts /////////
 
         hls::stream<ap_uint512_t> s_network_results;
 #pragma HLS stream variable=s_network_results depth=512
 // #pragma HLS RESOURCE variable=s_output core=FIFO_BRAM
 
-        network_output_converter_K_1<QUERY_NUM>(
+        network_output_converter_K_10<QUERY_NUM>(
             s_output, 
             s_network_results);
 
@@ -891,7 +888,6 @@ extern "C" {
             s_sessionID_out,
             expectedTxByteCnt, 
             pkgWordCountOut);
-          
           
         tie_off_tcp_open_connection(m_axis_tcp_open_connection, 
             s_axis_tcp_open_status);

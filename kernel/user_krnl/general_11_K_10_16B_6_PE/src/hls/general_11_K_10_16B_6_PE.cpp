@@ -399,7 +399,7 @@ void network_query_controller_pull(
 
 extern "C" {
 
-    void general_11_K_10(
+    void general_11_K_10_16B_6_PE(
 
         // Internal Stream, arg 0~3
         hls::stream<pkt512>& s_axis_udp_rx, 
@@ -411,7 +411,7 @@ extern "C" {
         hls::stream<pkt16>& m_axis_tcp_listen_port, 
         hls::stream<pkt8>& s_axis_tcp_port_status, 
         hls::stream<pkt64>& m_axis_tcp_open_connection, 
-        hls::stream<pkt128>& s_axis_tcp_open_status, 
+        hls::stream<pkt32>& s_axis_tcp_open_status, 
         hls::stream<pkt16>& m_axis_tcp_close_connection, 
         hls::stream<pkt128>& s_axis_tcp_notification, 
         hls::stream<pkt32>& m_axis_tcp_read_pkg, 
@@ -448,8 +448,6 @@ extern "C" {
         const ap_uint512_t* HBM_centroid_vectors_stage2_0,
         const ap_uint512_t* HBM_centroid_vectors_stage2_1,
         const ap_uint512_t* HBM_centroid_vectors_stage2_2,
-        const ap_uint512_t* HBM_centroid_vectors_stage2_3,
-        const ap_uint512_t* HBM_centroid_vectors_stage2_4,
 
         // HBM_meta_info containing several parts:
         //   (1) HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid: size = 3 * nlist
@@ -492,8 +490,6 @@ extern "C" {
 #pragma HLS INTERFACE m_axi port=HBM_centroid_vectors_stage2_0  offset=slave bundle=gmemC0
 #pragma HLS INTERFACE m_axi port=HBM_centroid_vectors_stage2_1  offset=slave bundle=gmemC1
 #pragma HLS INTERFACE m_axi port=HBM_centroid_vectors_stage2_2  offset=slave bundle=gmemC2
-#pragma HLS INTERFACE m_axi port=HBM_centroid_vectors_stage2_3  offset=slave bundle=gmemC3
-#pragma HLS INTERFACE m_axi port=HBM_centroid_vectors_stage2_4  offset=slave bundle=gmemC4
 
 #pragma HLS INTERFACE m_axi port=HBM_meta_info  offset=slave bundle=gmemA
 #pragma HLS INTERFACE m_axi port=HBM_vector_quantizer  offset=slave bundle=gmemC
@@ -518,8 +514,6 @@ extern "C" {
 #pragma HLS INTERFACE s_axilite port=HBM_centroid_vectors_stage2_0
 #pragma HLS INTERFACE s_axilite port=HBM_centroid_vectors_stage2_1
 #pragma HLS INTERFACE s_axilite port=HBM_centroid_vectors_stage2_2
-#pragma HLS INTERFACE s_axilite port=HBM_centroid_vectors_stage2_3
-#pragma HLS INTERFACE s_axilite port=HBM_centroid_vectors_stage2_4
 
 
 #pragma HLS INTERFACE s_axilite port=HBM_meta_info 
@@ -700,8 +694,6 @@ extern "C" {
         HBM_centroid_vectors_stage2_0,
         HBM_centroid_vectors_stage2_1,
         HBM_centroid_vectors_stage2_2,
-        HBM_centroid_vectors_stage2_3,
-        HBM_centroid_vectors_stage2_4,
 
         s_preprocessed_query_vectors_distance_computation_PE,
         s_merged_cell_distance);
@@ -872,26 +864,14 @@ extern "C" {
         s_single_PQ_result);
 
 
-        ////////////////////     Sort Results     ////////////////////    
-    Sort_reduction<single_PQ_result, SORT_GROUP_NUM * 16, TOPK, Collect_smallest> sort_reduction_module;
-
-    hls::stream<single_PQ_result> s_sorted_PQ_result[TOPK];
-#pragma HLS stream variable=s_sorted_PQ_result depth=8
-#pragma HLS array_partition variable=s_sorted_PQ_result complete
-// #pragma HLS RESOURCE variable=s_sorted_PQ_result core=FIFO_SRL
-
-    sort_reduction_module.sort_and_reduction<QUERY_NUM>(
-        s_scanned_entries_per_query_Sort_and_reduction, 
-        s_single_PQ_result, 
-        s_sorted_PQ_result);
 
     hls::stream<single_PQ_result> s_output; // the top 10 numbers
 #pragma HLS stream variable=s_output depth=512
 // #pragma HLS RESOURCE variable=s_output core=FIFO_BRAM
 
-    stage6_priority_queue_group_L2_wrapper<QUERY_NUM, TOPK>(
+    stage6_priority_queue_group_L2_wrapper<QUERY_NUM, STAGE5_COMP_PE_NUM>(
         s_scanned_entries_per_query_Priority_queue, 
-        s_sorted_PQ_result,
+        s_single_PQ_result,
         s_output);
 
         ///////// Network Send Starts /////////
