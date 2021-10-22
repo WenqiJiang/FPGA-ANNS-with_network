@@ -218,7 +218,7 @@ int main(int argc, char **argv) {
             OCL_CHECK(err,
                       network_kernel = cl::Kernel(program, "network_krnl", &err));
             OCL_CHECK(err,
-                      user_kernel = cl::Kernel(program, "general_11_K_1", &err));
+                      user_kernel = cl::Kernel(program, "general_11_K_100_12B_6_PE", &err));
             valid_device++;
             break; // we break because we found a valid device
         }
