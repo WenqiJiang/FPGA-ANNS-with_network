@@ -7,7 +7,7 @@ debug=1
 
 slr=cmac_krnl_1:SLR2
 
-sp=network_K_1_with_HBM.HBM_in0:HBM[0]
+sp=network_K_1_with_HBM_1.HBM_in0:HBM[0]
 
 sp=network_krnl_1.m00_axi:HBM[28]
 sp=network_krnl_1.m01_axi:HBM[29]
