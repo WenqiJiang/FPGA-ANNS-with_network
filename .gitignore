@@ -1,3 +1,10 @@
 build*
 _x*
 scripts
+*.jou
+*.log
+packaged_kernel*
+tmp_kernel*
+.ipcache
+host/host
+.Xil
