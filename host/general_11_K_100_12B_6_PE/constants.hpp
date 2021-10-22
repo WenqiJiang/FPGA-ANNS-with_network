@@ -79,8 +79,8 @@ Variable to be replaced (<--variable_name-->):
 
 
 // stage 5
-#define HBM_CHANNEL_NUM 16
-#define STAGE5_COMP_PE_NUM 4
+#define HBM_CHANNEL_NUM 12
+#define STAGE5_COMP_PE_NUM 3
 #define PQ_CODE_CHANNELS_PER_STREAM 12
 
 
@@ -88,4 +88,4 @@ Variable to be replaced (<--variable_name-->):
 //   SORT_GROUP_NUM = 2; if HBM channel = 12, PE_num = 36, then SORT_GROUP_NUM = 3
 #define SORT_GROUP_NUM 0
 #define STAGE_6_PRIORITY_QUEUE_LEVEL 2
-#define STAGE_6_PRIORITY_QUEUE_L1_NUM 8
+#define STAGE_6_PRIORITY_QUEUE_L1_NUM 6
