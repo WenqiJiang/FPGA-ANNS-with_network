@@ -456,7 +456,7 @@ void consume_query_vector_and_generate_output_K_1_with_HBM(
 
 extern "C" {
 
-    void network_K_1(
+    void network_K_1_with_HBM(
 
         // Internal Stream, arg 0~3
         hls::stream<pkt512>& s_axis_udp_rx, 
