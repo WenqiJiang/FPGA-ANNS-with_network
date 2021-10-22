@@ -829,7 +829,7 @@ int main(int argc, char **argv) {
         HBM_centroid_vectors0Ext,
         HBM_centroid_vectors1Ext,
         HBM_centroid_vectors2Ext,
-        
+
         // HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_validExt, // HBM 21
         // HBM_query_vectorExt, 
         HBM_meta_infoExt,
@@ -884,13 +884,13 @@ int main(int argc, char **argv) {
 
     HBM_centroid_vectors0Ext.obj = HBM_centroid_vectors0.data();
     HBM_centroid_vectors0Ext.param = 0;
-    HBM_centroid_vectors0Ext.flags = bank[22];
+    HBM_centroid_vectors0Ext.flags = bank[19];
     HBM_centroid_vectors1Ext.obj = HBM_centroid_vectors1.data();
     HBM_centroid_vectors1Ext.param = 0;
-    HBM_centroid_vectors1Ext.flags = bank[23];
+    HBM_centroid_vectors1Ext.flags = bank[20];
     HBM_centroid_vectors2Ext.obj = HBM_centroid_vectors2.data();
     HBM_centroid_vectors2Ext.param = 0;
-    HBM_centroid_vectors2Ext.flags = bank[24];
+    HBM_centroid_vectors2Ext.flags = bank[21];
 
 
     // HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_validExt.obj = 
