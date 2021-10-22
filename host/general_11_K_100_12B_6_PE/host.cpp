@@ -390,8 +390,6 @@ int main(int argc, char **argv) {
     size_t HBM_embedding11_size =  HBM_embedding11_fstream.tellg();
     if (!HBM_embedding11_size) std::cout << "HBM_embedding11_size is 0!";
     HBM_embedding11_fstream.seekg(0, HBM_embedding11_fstream.beg);
-    HBM_embedding12_fstream.seekg(0, HBM_embedding12_fstream.end);
-    size_t HBM_embedding12_size =  HBM_embedding12_fstream.tellg();
     
     size_t HBM_embedding0_len = (int) (HBM_embedding0_size / sizeof(ap_uint512_t));
     size_t HBM_embedding1_len = (int) (HBM_embedding1_size / sizeof(ap_uint512_t));
@@ -633,12 +631,6 @@ int main(int argc, char **argv) {
             std::cout << "error: only " << HBM_embedding11_fstream.gcount() << " could be read";
         exit(1);
      }
-    HBM_embedding12_fstream.read(HBM_embedding12_char, HBM_embedding12_size);
-    if (!HBM_embedding12_fstream) {
-            std::cout << "error: only " << HBM_embedding12_fstream.gcount() << " could be read";
-        exit(1);
-     }
-
 
     HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid_fstream.read(
         HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid_char,
