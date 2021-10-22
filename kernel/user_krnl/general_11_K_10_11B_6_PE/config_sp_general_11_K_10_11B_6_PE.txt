@@ -18,7 +18,6 @@ sp=general_11_K_10_11B_6_PE_1.HBM_in7:HBM[10]
 sp=general_11_K_10_11B_6_PE_1.HBM_in8:HBM[11]
 sp=general_11_K_10_11B_6_PE_1.HBM_in9:HBM[12]
 sp=general_11_K_10_11B_6_PE_1.HBM_in10:HBM[13]
-sp=general_11_K_10_11B_6_PE_1.HBM_in11:HBM[14]
 
 sp=general_11_K_10_11B_6_PE_1.HBM_centroid_vectors_stage2_0:HBM[19]
 sp=general_11_K_10_11B_6_PE_1.HBM_centroid_vectors_stage2_1:HBM[20]
