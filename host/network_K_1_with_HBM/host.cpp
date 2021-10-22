@@ -220,10 +220,15 @@ int main(int argc, char **argv) {
 
 
     ////////////////////    User Kernel Starts     //////////////////// 
-    size_t HBM_embedding0_size = QUERY_NUM;
+    size_t HBM_embedding0_size = QUERY_NUM * sizeof(ap_uint512_t);
     size_t HBM_embedding0_len = (int) (HBM_embedding0_size / sizeof(ap_uint512_t));
     std::vector<ap_uint512_t, aligned_allocator<ap_uint512_t>> HBM_embedding0(HBM_embedding0_len, 0);
 
+    std::cout << "Debug version: write to HBM0 (memset)" << std::endl;
+    // for (int i = 0; i < HBM_embedding0_len; i++) {
+    //     HBM_embedding0[i] = 100;
+    // }
+    memset(&HBM_embedding0[0], 100, HBM_embedding0_len);
     std::cout << "Start to allocate device memory..." << std::endl;
     cl_mem_ext_ptr_t HBM_embedding0Ext;
 

@@ -21,7 +21,6 @@ sp=general_11_K_10_11B_4_PE_1.HBM_in10:HBM[13]
 
 sp=general_11_K_10_11B_4_PE_1.HBM_centroid_vectors_stage2_0:HBM[19]
 sp=general_11_K_10_11B_4_PE_1.HBM_centroid_vectors_stage2_1:HBM[20]
-sp=general_11_K_10_11B_4_PE_1.HBM_centroid_vectors_stage2_2:HBM[21]
 
 sp=general_11_K_10_11B_4_PE_1.HBM_meta_info:HBM[25]
 sp=general_11_K_10_11B_4_PE_1.HBM_vector_quantizer:HBM[26]
