@@ -234,6 +234,8 @@ int main(int argc, char **argv) {
     OCL_CHECK(err, cl::Buffer buffer_HBM_embedding0(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
         HBM_embedding0_size, &HBM_embedding0Ext, &err)); 
             
+    int arg_counter = 19;
+    OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_embedding0));
     std::cout << "Starting copy from Host to device..." << std::endl;
     OCL_CHECK(
         err, err = q.enqueueMigrateMemObjects({
