@@ -58,11 +58,11 @@ Variable to be replaced (<--variable_name-->):
 // stage 2
 // 16 = 15 equal one + 1 (all equal) diff must be 1!
 
-#define PE_NUM_CENTER_DIST_COMP 9
+#define PE_NUM_CENTER_DIST_COMP 4
 
-#define PE_NUM_CENTER_DIST_COMP_EVEN 8
-#define CENTROIDS_PER_PARTITION_EVEN_MAX 7282
-#define CENTROIDS_PER_PARTITION_LAST_PE_MAX 7280
+#define PE_NUM_CENTER_DIST_COMP_EVEN 3
+#define CENTROIDS_PER_PARTITION_EVEN_MAX 16384
+#define CENTROIDS_PER_PARTITION_LAST_PE_MAX 16384
 
 
 // stage 3
@@ -72,20 +72,20 @@ Variable to be replaced (<--variable_name-->):
 
 // stage 4
 // first PE: construct 9 tables per query, last one construct 8
-#define PE_NUM_TABLE_CONSTRUCTION 9
+#define PE_NUM_TABLE_CONSTRUCTION 4
 
-#define PE_NUM_TABLE_CONSTRUCTION_LARGER 8
+#define PE_NUM_TABLE_CONSTRUCTION_LARGER 3
 #define PE_NUM_TABLE_CONSTRUCTION_SMALLER 1
 
 
 // stage 5
-#define HBM_CHANNEL_NUM 16
-#define STAGE5_COMP_PE_NUM 16
+#define HBM_CHANNEL_NUM 11
+#define STAGE5_COMP_PE_NUM 11
 #define PQ_CODE_CHANNELS_PER_STREAM 3
 
 
 // number of 16 outputs per cycle, e.g., HBM channel num = 10, comp PE num = 30, then 
 //   SORT_GROUP_NUM = 2; if HBM channel = 12, PE_num = 36, then SORT_GROUP_NUM = 3
-#define SORT_GROUP_NUM 1
+#define SORT_GROUP_NUM 0
 #define STAGE_6_PRIORITY_QUEUE_LEVEL 2
-#define STAGE_6_PRIORITY_QUEUE_L1_NUM 20
+#define STAGE_6_PRIORITY_QUEUE_L1_NUM 22
