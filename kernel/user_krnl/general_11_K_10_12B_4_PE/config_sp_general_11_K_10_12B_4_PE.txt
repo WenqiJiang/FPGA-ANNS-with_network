@@ -20,14 +20,14 @@ sp=general_11_K_10_12B_4_PE_1.HBM_in9:HBM[14]
 sp=general_11_K_10_12B_4_PE_1.HBM_in10:HBM[15]
 sp=general_11_K_10_12B_4_PE_1.HBM_in11:HBM[16]
 
-sp=general_11_K_10_12B_4_PE_1.HBM_centroid_vectors_stage2_0:HBM[23]
-sp=general_11_K_10_12B_4_PE_1.HBM_centroid_vectors_stage2_1:HBM[24]
+sp=general_11_K_10_12B_4_PE_1.HBM_centroid_vectors_stage2_0:HBM[20]
+sp=general_11_K_10_12B_4_PE_1.HBM_centroid_vectors_stage2_1:HBM[21]
 
-sp=general_11_K_10_12B_4_PE_1.HBM_meta_info:HBM[27]
-sp=general_11_K_10_12B_4_PE_1.HBM_vector_quantizer:HBM[28]
+sp=general_11_K_10_12B_4_PE_1.HBM_meta_info:HBM[25]
+sp=general_11_K_10_12B_4_PE_1.HBM_vector_quantizer:HBM[26]
 
-sp=network_krnl_1.m00_axi:HBM[18]
-sp=network_krnl_1.m01_axi:HBM[19]
+sp=network_krnl_1.m00_axi:HBM[28]
+sp=network_krnl_1.m01_axi:HBM[29]
 sc=network_krnl_1.m_axis_udp_rx:general_11_K_10_12B_4_PE_1.s_axis_udp_rx
 sc=network_krnl_1.m_axis_udp_rx_meta:general_11_K_10_12B_4_PE_1.s_axis_udp_rx_meta
 sc=network_krnl_1.m_axis_tcp_port_status:general_11_K_10_12B_4_PE_1.s_axis_tcp_port_status
