@@ -732,7 +732,7 @@ void forward_cell_distance_tail(
     for (int query_id = 0; query_id < query_num; query_id++) {
 
         // compute distance and write results out
-        for (int c = 0; c < centroids_per_partition_last_PE; c++) {
+        for (int c = 0; c < centroids_per_partition; c++) {
 
             // when the PE with larger ID finished computing, previous PE should already finished them
             for (int forward_iter = 0; forward_iter < systolic_array_id + 1; forward_iter++) {
@@ -740,19 +740,14 @@ void forward_cell_distance_tail(
                 dist_cell_ID_t out;
                 if (forward_iter < systolic_array_id) {
                     out = s_partial_cell_distance_in.read();
+                    s_cell_distance_out.write(out);
                 }
                 else{
-                    out = s_partial_cell_PE_result.read();
+                    if (c < centroids_per_partition_last_PE) {
+                        out = s_partial_cell_PE_result.read();
+                        s_cell_distance_out.write(out);
+                    }
                 }
-                s_cell_distance_out.write(out);
-            }
-        }
-
-        // forward the rest
-        for (int c = 0; c < centroids_per_partition - centroids_per_partition_last_PE; c++) {
-            for (int forward_iter = 0; forward_iter < systolic_array_id; forward_iter++) {
-#pragma HLS pipeline II=1
-                s_cell_distance_out.write(s_partial_cell_distance_in.read());
             }
         }
     }
