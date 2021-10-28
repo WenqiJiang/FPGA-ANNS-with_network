@@ -693,9 +693,6 @@ int main(int argc, char **argv) {
     int HBM_centroid_vectors_stage2_start_addr_1 = 2 * 1 * centroids_per_partition_even * D * sizeof(float);
     memcpy(&HBM_centroid_vectors1[0], HBM_vector_quantizer_char + HBM_centroid_vectors_stage2_start_addr_1, HBM_centroid_vectors1_size);
 
-    int HBM_centroid_vectors_stage2_start_addr_2 = 2 * 2 * centroids_per_partition_even * D * sizeof(float);
-    memcpy(&HBM_centroid_vectors2[0], HBM_vector_quantizer_char + HBM_centroid_vectors_stage2_start_addr_2, HBM_centroid_vectors2_size);
-
     memcpy(&raw_gt_vec_ID[0], raw_gt_vec_ID_char, raw_gt_vec_ID_size);
 
     free(HBM_embedding0_char);
@@ -795,34 +792,22 @@ int main(int argc, char **argv) {
     HBM_embedding5Ext.flags = bank[6];
     HBM_embedding6Ext.obj = HBM_embedding6.data();
     HBM_embedding6Ext.param = 0;
-    HBM_embedding6Ext.flags = bank[6];
+    HBM_embedding6Ext.flags = bank[9];
     HBM_embedding7Ext.obj = HBM_embedding7.data();
     HBM_embedding7Ext.param = 0;
-    HBM_embedding7Ext.flags = bank[7];
+    HBM_embedding7Ext.flags = bank[10];
     HBM_embedding8Ext.obj = HBM_embedding8.data();
     HBM_embedding8Ext.param = 0;
-    HBM_embedding8Ext.flags = bank[8];
+    HBM_embedding8Ext.flags = bank[11];
     HBM_embedding9Ext.obj = HBM_embedding9.data();
     HBM_embedding9Ext.param = 0;
-    HBM_embedding9Ext.flags = bank[9];
+    HBM_embedding9Ext.flags = bank[14];
     HBM_embedding10Ext.obj = HBM_embedding10.data();
     HBM_embedding10Ext.param = 0;
-    HBM_embedding10Ext.flags = bank[10];
+    HBM_embedding10Ext.flags = bank[15];
     HBM_embedding11Ext.obj = HBM_embedding11.data();
     HBM_embedding11Ext.param = 0;
-    HBM_embedding11Ext.flags = bank[11];
-    HBM_embedding12Ext.obj = HBM_embedding12.data();
-    HBM_embedding12Ext.param = 0;
-    HBM_embedding12Ext.flags = bank[12];
-    HBM_embedding13Ext.obj = HBM_embedding13.data();
-    HBM_embedding13Ext.param = 0;
-    HBM_embedding13Ext.flags = bank[13];
-    HBM_embedding14Ext.obj = HBM_embedding14.data();
-    HBM_embedding14Ext.param = 0;
-    HBM_embedding14Ext.flags = bank[14];
-    HBM_embedding15Ext.obj = HBM_embedding15.data();
-    HBM_embedding15Ext.param = 0;
-    HBM_embedding15Ext.flags = bank[15];
+    HBM_embedding11Ext.flags = bank[16];
 
     HBM_centroid_vectors0Ext.obj = HBM_centroid_vectors0.data();
     HBM_centroid_vectors0Ext.param = 0;
@@ -830,25 +815,6 @@ int main(int argc, char **argv) {
     HBM_centroid_vectors1Ext.obj = HBM_centroid_vectors1.data();
     HBM_centroid_vectors1Ext.param = 0;
     HBM_centroid_vectors1Ext.flags = bank[21];
-    HBM_centroid_vectors2Ext.obj = HBM_centroid_vectors2.data();
-    HBM_centroid_vectors2Ext.param = 0;
-    HBM_centroid_vectors2Ext.flags = bank[22];
-    HBM_centroid_vectors3Ext.obj = HBM_centroid_vectors3.data();
-    HBM_centroid_vectors3Ext.param = 0;
-    HBM_centroid_vectors3Ext.flags = bank[23];
-    HBM_centroid_vectors4Ext.obj = HBM_centroid_vectors4.data();
-    HBM_centroid_vectors4Ext.param = 0;
-    HBM_centroid_vectors4Ext.flags = bank[24];
-
-
-    // HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_validExt.obj = 
-    //     HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid.data();
-    // HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_validExt.param = 0;
-    // HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_validExt.flags = bank[21];
-
-    // HBM_query_vectorExt.obj = HBM_query_vectors.data();
-    // HBM_query_vectorExt.param = 0;
-    // HBM_query_vectorExt.flags = bank[22];
 
     HBM_meta_infoExt.obj = HBM_meta_info.data();
     HBM_meta_infoExt.param = 0;
@@ -858,20 +824,6 @@ int main(int argc, char **argv) {
     HBM_vector_quantizerExt.param = 0;
     HBM_vector_quantizerExt.flags = bank[26];
 
-    // HBM_product_quantizerExt.obj = HBM_product_quantizer.data();
-    // HBM_product_quantizerExt.param = 0;
-    // HBM_product_quantizerExt.flags = bank[24];
-
-// #ifdef OPQ_ENABLE
-    // HBM_OPQ_matrixExt.obj = HBM_OPQ_matrix.data();
-    // HBM_OPQ_matrixExt.param = 0;
-    // HBM_OPQ_matrixExt.flags = bank[25];
-// #endif
-
-    // HBM_outExt.obj = HBM_out.data();
-    // HBM_outExt.param = 0;
-    // HBM_outExt.flags = bank[27];
-    
 
 //////////////////////////////   TEMPLATE START  //////////////////////////////
     OCL_CHECK(err, cl::Buffer buffer_HBM_embedding0(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
@@ -898,40 +850,12 @@ int main(int argc, char **argv) {
             HBM_embedding10_size, &HBM_embedding10Ext, &err));
     OCL_CHECK(err, cl::Buffer buffer_HBM_embedding11(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
             HBM_embedding11_size, &HBM_embedding11Ext, &err));
-    OCL_CHECK(err, cl::Buffer buffer_HBM_embedding12(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-            HBM_embedding12_size, &HBM_embedding12Ext, &err));
-    OCL_CHECK(err, cl::Buffer buffer_HBM_embedding13(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-            HBM_embedding13_size, &HBM_embedding13Ext, &err));
-    OCL_CHECK(err, cl::Buffer buffer_HBM_embedding14(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-            HBM_embedding14_size, &HBM_embedding14Ext, &err));
-    OCL_CHECK(err, cl::Buffer buffer_HBM_embedding15(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-            HBM_embedding15_size, &HBM_embedding15Ext, &err));
+
 
     OCL_CHECK(err, cl::Buffer buffer_HBM_centroid_vectors0(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
             HBM_centroid_vectors0_size, &HBM_centroid_vectors0Ext, &err));
     OCL_CHECK(err, cl::Buffer buffer_HBM_centroid_vectors1(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
             HBM_centroid_vectors1_size, &HBM_centroid_vectors1Ext, &err));
-    OCL_CHECK(err, cl::Buffer buffer_HBM_centroid_vectors2(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-            HBM_centroid_vectors2_size, &HBM_centroid_vectors2Ext, &err));
-    OCL_CHECK(err, cl::Buffer buffer_HBM_centroid_vectors3(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-            HBM_centroid_vectors3_size, &HBM_centroid_vectors3Ext, &err));
-    OCL_CHECK(err, cl::Buffer buffer_HBM_centroid_vectors4(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-            HBM_centroid_vectors4_size, &HBM_centroid_vectors4Ext, &err));
-
-
-//     OCL_CHECK(err, cl::Buffer buffer_HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid(
-//         context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-//         HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid_size, 
-//         &HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_validExt, &err));
-
-//     OCL_CHECK(err, cl::Buffer buffer_HBM_query_vectors(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-//             HBM_query_vector_size, &HBM_query_vectorExt, &err));
-//     OCL_CHECK(err, cl::Buffer buffer_HBM_product_quantizer(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-//             HBM_product_quantizer_size, &HBM_product_quantizerExt, &err));
-// #ifdef OPQ_ENABLE
-//     OCL_CHECK(err, cl::Buffer buffer_HBM_OPQ_matrix(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
-//             HBM_OPQ_matrix_size, &HBM_OPQ_matrixExt, &err));
-// #endif
 
     OCL_CHECK(err, cl::Buffer buffer_HBM_vector_quantizer(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 
             HBM_vector_quantizer_size, &HBM_vector_quantizerExt, &err));
@@ -968,26 +892,13 @@ int main(int argc, char **argv) {
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_embedding9));
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_embedding10));
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_embedding11));
-    OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_embedding12));
-    OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_embedding13));
-    OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_embedding14));
-    OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_embedding15));
 
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_centroid_vectors0));
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_centroid_vectors1));
-    OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_centroid_vectors2));
-    OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_centroid_vectors3));
-    OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_centroid_vectors4));
 
-    
-    // OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid));
-    // OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_query_vectors));
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_meta_info));
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_vector_quantizer));
-    // OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_product_quantizer));
-// #ifdef OPQ_ENABLE
-//     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, buffer_HBM_OPQ_matrix));
-// #endif
+
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, nlist));
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, nprobe));
     OCL_CHECK(err, err = user_kernel.setArg(arg_counter++, OPQ_enable));
@@ -1018,25 +929,12 @@ int main(int argc, char **argv) {
         buffer_HBM_embedding9,
         buffer_HBM_embedding10,
         buffer_HBM_embedding11,
-        buffer_HBM_embedding12,
-        buffer_HBM_embedding13,
-        buffer_HBM_embedding14,
-        buffer_HBM_embedding15,
 
         buffer_HBM_centroid_vectors0,
         buffer_HBM_centroid_vectors1,
-        buffer_HBM_centroid_vectors2,
-        buffer_HBM_centroid_vectors3,
-        buffer_HBM_centroid_vectors4,
 
-        // buffer_HBM_info_start_addr_and_scanned_entries_every_cell_and_last_element_valid,
-        // buffer_HBM_query_vectors,
         buffer_HBM_meta_info,
         buffer_HBM_vector_quantizer
-//         buffer_HBM_product_quantizer,
-// #ifdef OPQ_ENABLE
-//         buffer_HBM_OPQ_matrix
-// #endif
         }, 0/* 0 means from host*/));	
     std::cout << "Host to device finished..." << std::endl;
 
