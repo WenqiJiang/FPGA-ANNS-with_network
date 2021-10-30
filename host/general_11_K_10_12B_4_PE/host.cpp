@@ -811,7 +811,7 @@ int main(int argc, char **argv) {
 
     HBM_centroid_vectors0Ext.obj = HBM_centroid_vectors0.data();
     HBM_centroid_vectors0Ext.param = 0;
-    HBM_centroid_vectors0Ext.flags = bank[20];
+    HBM_centroid_vectors0Ext.flags = bank[18];
     HBM_centroid_vectors1Ext.obj = HBM_centroid_vectors1.data();
     HBM_centroid_vectors1Ext.param = 0;
     HBM_centroid_vectors1Ext.flags = bank[21];

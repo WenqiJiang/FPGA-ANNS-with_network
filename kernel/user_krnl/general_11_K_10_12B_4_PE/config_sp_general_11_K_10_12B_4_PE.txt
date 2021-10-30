@@ -20,7 +20,7 @@ sp=general_11_K_10_12B_4_PE_1.HBM_in9:HBM[14]
 sp=general_11_K_10_12B_4_PE_1.HBM_in10:HBM[15]
 sp=general_11_K_10_12B_4_PE_1.HBM_in11:HBM[16]
 
-sp=general_11_K_10_12B_4_PE_1.HBM_centroid_vectors_stage2_0:HBM[20]
+sp=general_11_K_10_12B_4_PE_1.HBM_centroid_vectors_stage2_0:HBM[18]
 sp=general_11_K_10_12B_4_PE_1.HBM_centroid_vectors_stage2_1:HBM[21]
 
 sp=general_11_K_10_12B_4_PE_1.HBM_meta_info:HBM[25]
